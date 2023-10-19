@@ -1,12 +1,8 @@
-#include <iostream>
-#include "./method_example.cpp"
+#include "function.h"
 
-int main() {
-    using namespace method::example;
-    LinearFunc func = LinearFunc(2.f, 1.f);
 
-    float res = func.calc(2);
+int main(int argv, char *argc[]){
+    Function a = Function(30., 0.001);
 
-    std::cout << "Result: " << res << std::endl;
-    return 0;
+
 }
