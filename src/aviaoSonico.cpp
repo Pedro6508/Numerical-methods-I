@@ -52,16 +52,20 @@ public:
         double x2 = getX2();
         
         while((abs(x1 - x2) > getE1()) && (i<100)){
+            if ((f(x2) - f(x1)) != 0){
+                xk = (x1 * f(x2) - x2 * f(x1)) / (f(x2) - f(x1));
+            }  else {
+                return xk;
+            }
             
-            xk = (x1 * f(x2) - x2 * f(x1)) / (f(x2) - f(x1));
             f1 = f(x1);
             f2 = f(x2);
     
             // Avalia f(x1) e f(x2)
             if (f1 == 0){
-                return f1;
+                return x1;
             } else if (f2 == 0) {
-                return f2;
+                return x2;
             } else if (f1 * f2 < 0) {
                 x2 = xk;
             } else {
