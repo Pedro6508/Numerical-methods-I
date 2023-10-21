@@ -1,6 +1,6 @@
 #include <iostream>
 #include "sonic_airplane.h"
-
+#include "output.h"
 using namespace std;
 
 int main() {
@@ -22,5 +22,6 @@ int main() {
     double newtonRaphson = airplane.newtonRaphson();
     cout << "Newton-Raphson Method result: " << newtonRaphson << endl;
 
+    result::run();
     return 0;
 }

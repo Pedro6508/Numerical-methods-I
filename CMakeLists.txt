@@ -10,7 +10,11 @@ set(SOURCE_FILES
         src/function.cpp
         src/main.cpp
         src/sonic_airplane.cpp
+        src/output.cpp
 )
+
+# Include fmt directory
+add_subdirectory(fmt)
 
 # Include directories
 include_directories(src)
@@ -22,3 +26,6 @@ add_executable(Executable ${SOURCE_FILES})
 set_target_properties(Executable PROPERTIES
         RUNTIME_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/bin
 )
+
+# Link libraries
+target_link_libraries(Executable fmt::fmt)

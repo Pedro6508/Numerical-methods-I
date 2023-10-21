@@ -1,4 +1,3 @@
-#include <iostream>
 #include <cmath>
 #include "function.h"
 #include "sonic_airplane.h"
