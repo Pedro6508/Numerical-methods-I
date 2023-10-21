@@ -32,7 +32,7 @@ double SonicAirplane::bisection(){
         f1 = f(x1);
         f2 = f(x2);
 
-        // Avalia f(x1) e f(x2)
+        // Choose between x1 and x2
         if (f1 == 0){
             return f1;
         } else if (f2 == 0) {
@@ -64,7 +64,7 @@ double SonicAirplane::falsePosition(){
         f1 = f(x1);
         f2 = f(x2);
 
-        // Choose between f(x1) and f(x2)
+        // Choose between x1 and x2
         if (f1 == 0){
             return x1;
         } else if (f2 == 0) {

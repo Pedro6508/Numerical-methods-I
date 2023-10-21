@@ -1,7 +1,6 @@
 #ifndef SONIC_AIRPLANE_H
 #define SONIC_AIRPLANE_H
 
-// Inclua o arquivo de cabeçalho da classe Function
 #include "function.h"
 
 namespace impl {
