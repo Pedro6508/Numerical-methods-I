@@ -19,34 +19,59 @@ class Function {
 #ifndef FUNCTION_H
 #define FUNCTION_H
 
-class Function {
-private:
-    double* t;
-    double a;
-    int n;
-    double* raizes;
-    double raiz;
-    double x1, x2;
-    double e1;
+namespace utils {
+    class Function {
+    private:
+        // Function Terms
+        double *t;
+        double a{};
 
-protected:
-    double* getTermos();
-    double getA();
-    int getN();
-    double* getRaizes();
-    double getRaiz();
-    double getX1();
-    double getX2();
-    double getE1();
+        // Number of Roots
+        int n;
 
-public:
-    Function(double a, double x1, double x2, int n, double e1);
-    Function(double* t, double x1, double x2, int n, double e1);
-    virtual double f(double x) = 0;
-    virtual double ddx(double d) = 0;
-    virtual double bissec() = 0;
-    virtual double pos_falsa() = 0;
-    virtual double newt_raph() = 0;
-};
+        // Roots
+        double *roots;
+        double root{};
+
+        // Function analysis range
+        double x1, x2;
+
+        // Tolerable Error
+        double eps;
+
+    protected:
+        double *getTerms();
+
+        double getA() const;
+
+        int getN() const;
+
+        double *getRoots();
+
+        double getRoot() const;
+
+        double getX1() const;
+
+        double getX2() const;
+
+        double getEps() const;
+
+    public:
+        Function(double a, double x1, double x2, int n, double eps);
+
+        Function(double *t, double x1, double x2, int n, double eps);
+
+        // Function f
+        virtual double f(double x) = 0;
+
+        // Derivative of function f
+        virtual double ddx(double d) = 0;
+
+        // Numerical Methods
+        virtual double bisection() = 0;
+        virtual double falsePosition() = 0;
+        virtual double newtonRaphson() = 0;
+    };
+}
 
 #endif // FUNCTION_H
