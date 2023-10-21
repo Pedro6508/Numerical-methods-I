@@ -1,26 +1,41 @@
 #include <iostream>
+#include "output.h"
 #include "sonic_airplane.h"
 
 using namespace std;
 
 int main() {
-    double a = 1.0;
-    double x1 = 2.0;
-    double x2 = 3.0;
-    double e1 = 10e-5;
-    impl::SonicAirplane airplane(a, x1, x2, e1);
+    Result::Output Tabela;
+    cout << "1 - Inserir aviões\n2 - Quadro Resposta\n3 - Quadro Comparativo\nOutro - Sair " << endl;
+    int num;
+    while (true) {
+        cout << ": ";
+        cin >> num;
+        cout << "\n";
 
-    // Test the Bisection Method implementation
-    double bisection = airplane.bisection();
-    cout << "Bisection Method result: " << bisection << endl;
+        if (num == 1){
+            double a;
+            double e;
+            cout << "Insira o 'a' do avião: ";
+            cin >> a;
+            cout << "Insira a precisão: ";
+            cin >> e;
+            Tabela.inputFunction(a, e);
+        }
+        else if(num == 2) {
+            Tabela.resultTable();
+            cout << "\n\n";
 
-    // Test the False-Position Method implementation
-    double falsePosition = airplane.falsePosition();
-    cout << "False-Position Method result: " << falsePosition << endl;
+        }
+        else if(num == 3){
+            Tabela.comparativeTable();
+            cout << "\n\n";
 
-    // Test the Newton-Raphson Method implementation
-    double newtonRaphson = airplane.newtonRaphson();
-    cout << "Newton-Raphson Method result: " << newtonRaphson << endl;
+        }
+        else {
+            break;
+        }
+    }
 
     return 0;
 }

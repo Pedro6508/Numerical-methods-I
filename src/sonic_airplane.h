@@ -7,7 +7,7 @@ namespace impl {
 class SonicAirplane : public utils::Function {
     public:
         SonicAirplane(double a, double x1, double x2, double e1);
-
+        SonicAirplane(double a, double e1);
         double f(double d) override;
         double ddx(double d) override;
         double bisection() override;
