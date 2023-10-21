@@ -1,0 +1,3 @@
+/home/gustavofvv/Faculdade/S4/MN/Numerical-methods-I/CMakeFiles/Executable.dir
+/home/gustavofvv/Faculdade/S4/MN/Numerical-methods-I/CMakeFiles/edit_cache.dir
+/home/gustavofvv/Faculdade/S4/MN/Numerical-methods-I/CMakeFiles/rebuild_cache.dir
