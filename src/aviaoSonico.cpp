@@ -1,5 +1,6 @@
 #include <iostream>
 #include <cmath>
+#include "function.h"
 
 class AviaoSonico : public Function {
 public:
