@@ -29,11 +29,10 @@ void result::run() {
     };
 
     int colLength = MaxKeyLength(productToOrders) + 2;
-    int mapRows = productToOrders.size();
     for (const auto& name : std::views::keys(productToOrders))
         std::cout << fmt::format("{:>{}}", name, colLength);
     std::cout << '\n';
-    for (size_t i = 0; i < mapRows; ++i) {
+    for (size_t i = 0; i < Rows; ++i) {
         for (const auto& values : std::views::values(productToOrders)) {
             std::cout << fmt::format("{:>{}.2f}", values[i], colLength);
         }
