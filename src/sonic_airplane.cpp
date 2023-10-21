@@ -7,11 +7,11 @@ using namespace impl;
 
 
 SonicAirplane::SonicAirplane(double a, double x1, double x2, double e1)
-    : Function(a, x1, x2, 1, e1) {
+    : Function(a, x1, x2, 1, e1), iter_bis(0), iter_newt(0), iter_pos(0) {
 }
 
 SonicAirplane::SonicAirplane(double a, double e1)
-    : Function(a, floor(exp(a)), ceil(exp(a)), 1, e1) {
+    : Function(a, floor(exp(a)), ceil(exp(a)), 1, e1), iter_bis(0), iter_newt(0), iter_pos(0) {
 }
 
 
@@ -47,7 +47,10 @@ double SonicAirplane::bisection(){
         }
 
         i++;
+        this -> iter_bis = i;
+
     }
+
     return xk;
 }
 
@@ -78,8 +81,9 @@ double SonicAirplane::falsePosition(){
         } else {
             x1 = xk;
         }
-
         i++;
+        this -> iter_pos = i;
+
     }
     return xk;
 }
@@ -99,9 +103,24 @@ double SonicAirplane::newtonRaphson(){
             xk0 = xk1;
             xk1 = xk0 - (f(xk0)/ddx(xk0));
             i++;
+            this -> iter_newt = i;
+
         } catch (...){
             return xk0;
         }
     }
+
     return xk1;
+}
+
+int SonicAirplane::getIBis(){
+    return iter_bis;
+}
+
+int SonicAirplane::getINewt(){
+    return iter_newt;
+}
+
+int SonicAirplane::getIPos(){
+    return iter_pos;
 }

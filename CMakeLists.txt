@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.26)
+cmake_minimum_required(VERSION 3.22)
 project(Metodos_Numericos)
 
 # Set C++ standard to C++20
@@ -10,6 +10,7 @@ set(SOURCE_FILES
         src/function.cpp
         src/main.cpp
         src/sonic_airplane.cpp
+        src/output.cpp
 )
 
 # Include directories
