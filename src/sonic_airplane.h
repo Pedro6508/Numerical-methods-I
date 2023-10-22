@@ -9,7 +9,9 @@ class SonicAirplane : public utils::Function {
         int iter_bis;
         int iter_newt;
         int iter_pos;
-
+        double err_bis;
+        double err_newt;
+        double err_pos;
 
     public:
         SonicAirplane(double a, double x1, double x2, double e1);
@@ -22,6 +24,9 @@ class SonicAirplane : public utils::Function {
         int getIBis();
         int getINewt();
         int getIPos();
+        double getEBis();
+        double getENewt();
+        double getEPos();
     };
 }
 
