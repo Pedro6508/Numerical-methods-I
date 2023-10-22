@@ -1,0 +1,1 @@
+/usr/bin/c++ CMakeFiles/Executable.dir/src/function.cpp.o CMakeFiles/Executable.dir/src/main.cpp.o CMakeFiles/Executable.dir/src/sonic_airplane.cpp.o CMakeFiles/Executable.dir/src/output.cpp.o -o bin/Executable 
