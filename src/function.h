@@ -20,7 +20,6 @@ namespace utils {
 
         // Tolerable Error
         double eps;
-
     protected:
         double *getTerms();
 
