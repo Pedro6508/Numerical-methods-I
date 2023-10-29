@@ -14,7 +14,7 @@ namespace impl
 
     public:
         SonicAirplane(double a, double x1, double x2, double e1);
-        SonicAirplane(double a, double e1);
+//        SonicAirplane(double a, double e1);
         result::MethodData CaptureMethodData();
 
         double f(double d) override;
