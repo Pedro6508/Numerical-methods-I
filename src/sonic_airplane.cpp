@@ -9,10 +9,10 @@ SonicAirplane::SonicAirplane(double a, double x1, double x2, double e1)
     methodData = result::MethodData{};
 }
 
-//SonicAirplane::SonicAirplane(double a, double e1)
-//    : Function(a, floor(exp(a)), ceil(exp(a)), 1, e1), iter_bis(0), iter_newt(0), iter_pos(0), err_bis(0), err_newt(0), err_pos(0)
-//{
-//}
+SonicAirplane::SonicAirplane(double a, double e1)
+    : Function(a, floor(exp(a)), ceil(exp(a)), 1, e1)
+{
+}
 
 double SonicAirplane::f(double d)
 {
