@@ -1,5 +1,4 @@
 #include <cmath>
-#include "function.h"
 #include "sonic_airplane.h"
 
 using namespace impl;

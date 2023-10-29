@@ -11,11 +11,8 @@ int main() {
     impl::SonicAirplane airplane(a, x1, x2, e1);
 
     result::MethodData bisectionMethod;
-//    {{1, 1}, {2, 2}, {4, 4}, {8, 8}};
     result::MethodData newtonRaphsonMethod;
-//    {{1, 1}, {5, 5}, {25, 25}};
     result::MethodData falsePositionMethod;
-//    {{1, 1}, {3, 3}, {9, 9}, {27,27}, {81, 81}, {243, 243}};
 
     // Test the Bisection Method implementation
     double bisection = airplane.bisection();
