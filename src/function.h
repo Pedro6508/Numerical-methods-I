@@ -30,14 +30,13 @@ namespace utils {
         double *getRoots();
 
         double getRoot() const;
-
+    public:
         double getX1() const;
 
         double getX2() const;
 
         double getEps() const;
 
-    public:
         Function(double a, double x1, double x2, int n, double eps);
 
         Function(double *t, double x1, double x2, int n, double eps);

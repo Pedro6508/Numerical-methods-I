@@ -1,6 +1,7 @@
 #include <iostream>
 #include "sonic_airplane.h"
 #include "output.h"
+#include <cmath>
 using namespace std;
 
 int main() {
@@ -16,16 +17,22 @@ int main() {
 
     // Test the Bisection Method implementation
     double bisection = airplane.bisection();
+    double bisectionEps = a - fabs(airplane.getX2() - airplane.getX1());
+    airplane.put(bisection, bisectionEps);
     bisectionMethod = airplane.CaptureMethodData();
     cout << "Bisection Method result: " << bisection << endl;
 
     // Test the False-Position Method implementation
     double falsePosition = airplane.falsePosition();
+    double falsePositionEps = a - fabs(airplane.getX2() - airplane.getX1());
+    airplane.put(falsePosition, falsePositionEps);
     falsePositionMethod = airplane.CaptureMethodData();
     cout << "False-Position Method result: " << falsePosition << endl;
 
     // Test the Newton-Raphson Method implementation
     double newtonRaphson = airplane.newtonRaphson();
+    double newtonRaphsonEps = a - fabs(airplane.getX2() - airplane.getX1());
+    airplane.put(newtonRaphson, newtonRaphsonEps);
     newtonRaphsonMethod = airplane.CaptureMethodData();
     cout << "Newton-Raphson Method result: " << newtonRaphson << endl;
 
