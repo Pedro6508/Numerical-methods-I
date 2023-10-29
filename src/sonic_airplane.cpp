@@ -7,6 +7,7 @@ using namespace impl;
 
 SonicAirplane::SonicAirplane(double a, double x1, double x2, double e1)
     : Function(a, x1, x2, 1, e1) {
+    methodData = result::MethodData {};
 }
 
 double SonicAirplane::f(double d){
@@ -17,6 +18,14 @@ double SonicAirplane::ddx(double d){
     return (getA() - (log(d) + 1));
 }
 
+void SonicAirplane::put(double xk, double epsk) {
+    methodData.push_back({xk, epsk});
+}
+
+result::MethodData SonicAirplane::CaptureMethodData() {
+    return methodData;
+};
+
 // The variable i will be used to limit the number of iterations
 
 double SonicAirplane::bisection(){
@@ -24,10 +33,12 @@ double SonicAirplane::bisection(){
     int i = 0;
     double x1 = getX1();
     double x2 = getX2();
+    double epsk = abs(x1 - x2) - getEps();
 
-    while((abs(x1 - x2) > getEps()) && (i < 100)){
-
+    while((epsk > 0) && (i < 100)){
+        put(xk, epsk);
         xk = (x1 + x2) / 2;
+
         f1 = f(x1);
         f2 = f(x2);
 
@@ -42,6 +53,7 @@ double SonicAirplane::bisection(){
             x1 = xk;
         }
 
+        epsk = abs(x1 - x2) - getEps();
         i++;
     }
     return xk;
@@ -52,12 +64,14 @@ double SonicAirplane::falsePosition(){
     int i = 0;
     double x1 = getX1();
     double x2 = getX2();
+    double epsk = abs(x1 - x2) - getEps();
 
-    while((abs(x1 - x2) > getEps()) && (i < 100)){
+    while((epsk > 0) && (i < 100)){
+        put(xk, epsk);
         if ((f(x2) - f(x1)) != 0){
             xk = (x1 * f(x2) - x2 * f(x1)) / (f(x2) - f(x1));
         }  else {
-            return xk;
+            break;
         }
 
         f1 = f(x1);
@@ -74,6 +88,7 @@ double SonicAirplane::falsePosition(){
             x1 = xk;
         }
 
+        epsk = abs(x1 - x2) - getEps();
         i++;
     }
     return xk;
@@ -88,8 +103,10 @@ double SonicAirplane::newtonRaphson(){
     } catch (...){
         return xk0;
     }
+    double epsk = abs(xk0 - xk1) - getEps();
 
-    while((abs(xk0 - xk1) > getEps()) && (i < 100)){
+    while((epsk > 0) && (i < 100)){
+        put(xk1, epsk);
         try{
             xk0 = xk1;
             xk1 = xk0 - (f(xk0)/ddx(xk0));
@@ -97,6 +114,7 @@ double SonicAirplane::newtonRaphson(){
         } catch (...){
             return xk0;
         }
+        epsk = abs(xk0 - xk1) - getEps();
     }
     return xk1;
 }

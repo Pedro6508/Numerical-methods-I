@@ -1,6 +1,8 @@
 #ifndef FUNCTION_H
 #define FUNCTION_H
 
+#include "output.h"
+
 namespace utils {
     class Function {
     private:
@@ -20,7 +22,6 @@ namespace utils {
 
         // Tolerable Error
         double eps;
-
     protected:
         double *getTerms();
 

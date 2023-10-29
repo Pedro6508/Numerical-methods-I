@@ -1,4 +1,5 @@
 #include <iostream>
+#include <format>
 #include "function.h"
 
 using namespace std;
@@ -16,7 +17,8 @@ double Function::getEps() const { return eps; }
 
 // Constructors
 Function::Function(double a, double x1, double x2, int n, double eps)
-    : a(a), x1(x1), x2(x2), n(n), eps(eps), t(nullptr), roots(nullptr) {}
+    : a(a), x1(x1), x2(x2), n(n), eps(eps), t(nullptr), roots(nullptr) {
+}
 
 Function::Function(double* t, double x1, double x2, int n, double eps)
     : t(t), x1(x1), x2(x2), n(n), eps(eps), root(0.0) {

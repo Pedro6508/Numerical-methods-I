@@ -16,7 +16,7 @@ size_t result::MaxKeyLength(const std::map<std::string, T> &m) {
 }
 
 template<typename T>
-size_t MaxRowLength(const std::map<std::string, T> &m) {
+size_t result::MaxRowLength(const std::map<std::string, T> &m) {
     auto res = std::ranges::max_element(std::views::values(m),
         [](const auto &a, const auto &b) {
             return a.size() < b.size();
@@ -24,49 +24,38 @@ size_t MaxRowLength(const std::map<std::string, T> &m) {
     return (*res).size();
 }
 
-typedef std::vector<std::tuple<double, double>> MethodData;
 
-void printRowName(std::string name, const std::string& padding, int size) {
+
+void result::printRowName(std::string name, const std::string& padding, int size) {
     using namespace fmt;
-    std::cout << format("{:{}}", name, size);
-    std::cout << padding;
+    std::cout << format("{}{}{}", padding, name, padding, size);
+
 }
 
-void printRowLabel(const std::string& padding, int size) {
+void result::printRowLabel(const std::string& padding, int size) {
     using namespace fmt;
-
-    std::cout << format("{:{}}","Result\tError", size);
     std::cout << padding;
+    std::cout << format("{:}","Iter\tResult\tError", size);
 }
-
-void printRow(double result, double error, int relativePos, const std::string& padding, int size) {
+//Iter	Result	Error
+void result::printRow(double result, double error, int iter, int v_size, const std::string& padding, int size) {
     using namespace fmt;
-    if (relativePos > 0) {
-        std::cout << format("{:.2f}\t{:.2f}", result, error, size);
+    std::cout << padding;
+    if (v_size - iter > 0) {
+        std::cout << format("[{:02d}]\t{:.2f}\t{:.2f}", iter, result, error, size);
     } else {
-        std::cout << format("{:{}}", "End", size);
+        std::cout << format("[{:}]\t{:}\t{:}", "--", "----", "----",size);
     }
-    std::cout << padding;
 }
 
-void result::run() {
+void result::run(std::map<std::string, result::MethodData> table) {
     using namespace std;
 
-    constexpr size_t Rows = 5;
-    const MethodData bisectionMethod = {{1, 1}, {2, 2}, {4, 4}, {8, 8}};
-    const MethodData newtonRaphsonMethod = {{1, 1}, {5, 5}, {25, 25}};
-    const MethodData falsePositionMethod = {{1, 1}, {3, 3}, {9, 9}, {27,27}, {81, 81}, {243, 243}};
-
-    const map<string, MethodData> table{
-            {"Bisection", bisectionMethod},
-            {"False-Position", falsePositionMethod},
-            {"Newton-Raphson", newtonRaphsonMethod},
-    };
-
     size_t Columns = 3;
-    int colSize = int(MaxKeyLength(table));
+    int colSize = 35;
     int rowSize = int(MaxRowLength(table));
     const string padding = "\t\t";
+    std::cout << padding;
     for (const auto& name: views::keys(table)) {
         printRowName(name, padding, colSize);
     }
@@ -79,7 +68,7 @@ void result::run() {
 
     for (size_t i = 0; i < rowSize; i++) {
         for (const auto &row: views::values(table)) {
-            printRow(get<0>(row[i]), get<1>(row[i]), int(row.size()) - int(i), padding, colSize);
+            printRow(get<0>(row[i]), get<1>(row[i]), int(i), int(row.size()), padding, colSize);
         }
         cout << "\n";
     }

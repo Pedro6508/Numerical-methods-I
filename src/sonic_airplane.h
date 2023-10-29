@@ -2,11 +2,17 @@
 #define SONIC_AIRPLANE_H
 
 #include "function.h"
+#include "output.h"
 
 namespace impl {
 class SonicAirplane : public utils::Function {
+    private:
+        result::MethodData methodData;
+        void put(double xk,double epsk);
     public:
         SonicAirplane(double a, double x1, double x2, double e1);
+
+        result::MethodData CaptureMethodData();
 
         double f(double d) override;
         double ddx(double d) override;
