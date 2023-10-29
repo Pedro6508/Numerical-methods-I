@@ -4,16 +4,19 @@
 #include "function.h"
 #include "output.h"
 
-namespace impl {
-class SonicAirplane : public utils::Function {
+namespace impl
+{
+    class SonicAirplane : public utils::Function
+    {
     private:
         result::MethodData methodData;
-        void put(double xk,double epsk);
+
     public:
         SonicAirplane(double a, double x1, double x2, double e1);
-
+//        SonicAirplane(double a, double e1);
         result::MethodData CaptureMethodData();
 
+        void put(double xk, double epsk);
         double f(double d) override;
         double ddx(double d) override;
         double bisection() override;

@@ -22,53 +22,55 @@ size_t result::MaxRowLength(const std::map<std::string, T> &m) {
             return a.size() < b.size();
         });
     return (*res).size();
-}
-
-
+} //        Bisection
 
 void result::printRowName(std::string name, const std::string& padding, int size) {
     using namespace fmt;
-    std::cout << format("{}{}{}", padding, name, padding, size);
+    std::string data = format("\t{:}{:}\t", name, padding, size);
 
+    std::cout << format("|{:*^{}}|", data, size);
 }
 
 void result::printRowLabel(const std::string& padding, int size) {
     using namespace fmt;
-    std::cout << padding;
-    std::cout << format("{:}","Iter\tResult\tError", size);
+    std::string data = format("{:^5}\t{:<8}\t{:<8}","Iter", "Result", "Err", size);
+    std::cout << format("|{:^{}}|", data, size);
 }
 //Iter	Result	Error
 void result::printRow(double result, double error, int iter, int v_size, const std::string& padding, int size) {
     using namespace fmt;
-    std::cout << padding;
+    std::string data;
     if (v_size - iter > 0) {
-        std::cout << format("[{:02d}]\t{:.2f}\t{:.2f}", iter, result, error, size);
+        data = format("[{:03d}]\t{:.6f}\t{:.6f}", iter, result, error, size);
     } else {
-        std::cout << format("[{:}]\t{:}\t{:}", "--", "----", "----",size);
+        data = format("[{:}]\t{:}\t{:}", "---", "--------", "--------",size);
     }
+
+    std::cout << format("|{:^{}}|", data, size);
 }
 
 void result::run(std::map<std::string, result::MethodData> table) {
     using namespace std;
 
     size_t Columns = 3;
-    int colSize = 35;
+    int colSize = 28;
     int rowSize = int(MaxRowLength(table));
-    const string padding = "\t\t";
-    std::cout << padding;
+    const string paddingName = "  ";
     for (const auto& name: views::keys(table)) {
-        printRowName(name, padding, colSize);
+        printRowName(name, paddingName, colSize);
     }
     cout << "\n";
 
+    const string paddingLabel = "";
     for (size_t i = 0; i < Columns; i++) {
-        printRowLabel(padding, colSize);
+        printRowLabel(paddingLabel, colSize);
     }
     cout << "\n";
 
+    const string paddingRow = "";
     for (size_t i = 0; i < rowSize; i++) {
         for (const auto &row: views::values(table)) {
-            printRow(get<0>(row[i]), get<1>(row[i]), int(i), int(row.size()), padding, colSize);
+            printRow(get<0>(row[i]), get<1>(row[i]), int(i), int(row.size()), paddingRow, colSize);
         }
         cout << "\n";
     }
