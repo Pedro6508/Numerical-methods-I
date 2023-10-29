@@ -6,12 +6,12 @@ using namespace std;
 
 int main() {
     double a = 1.0;
-    double x1 = 2.0;
-    double x2 = 3.0;
+//    double x1 = 2.0;
+//    double x2 = 3.0;
     double e1 = 10e-5;
-    impl::SonicAirplane airplane1(a, x1, x2, e1);
-    impl::SonicAirplane airplane2(a, x1, x2, e1);
-    impl::SonicAirplane airplane3(a, x1, x2, e1);
+    impl::SonicAirplane airplane1(a, e1);
+    impl::SonicAirplane airplane2(a, e1);
+    impl::SonicAirplane airplane3(a, e1);
 
     result::MethodData bisectionMethod;
     result::MethodData newtonRaphsonMethod;
