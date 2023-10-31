@@ -22,7 +22,7 @@ size_t result::MaxRowLength(const std::map<std::string, T> &m) {
             return a.size() < b.size();
         });
     return (*res).size();
-} //        Bisection
+}
 
 void result::printRowName(std::string name, const std::string& padding, int size) {
     using namespace fmt;
