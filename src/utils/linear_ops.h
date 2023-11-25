@@ -3,67 +3,77 @@
 #include "iostream"
 
 namespace LinearOps {
-    namespace Vec {
-        class Vector {
-        private:
-            double *v;
-            int size;
-        public:
-            explicit Vector(int size);
+    class Vector {
+    private:
+        double *v;
+    public:
+        const size_t size;
+        const u_int elSize = 5;
 
-            Vector(const double *v, int size);
+        explicit Vector(size_t size);
 
-            Vector(const Vector &vector);
+        Vector(const double *v, size_t size);
 
-            ~Vector();
+        Vector(const Vector &vector);
 
-            double *getV() const;
+        Vector(size_t size, double x, const std::function<double(double)>& f);
 
-            int getSize() const;
+        ~Vector();
 
-            double innerProduct(const Vector &vector);
+        Vector operator*(const double &scalar);
 
-            static void test();
-        };
+        Vector operator+(const Vector &vector);
 
-        std::ostream &operator<<(std::ostream &os, const Vector &vector);
-    }
+        Vector operator-(const Vector &vector);
 
-    namespace Mat {
-        class Matrix {
-        private:
-            double **m;
-            int rows, cols;
+        double operator*(const Vector &vector);
 
-        public:
-            Matrix(int rows, int cols);
+        Vector operator!();
 
-            Matrix(double **m, int rows, int cols);
+        double &operator[](size_t i);
 
-            Matrix(const Matrix &matrix);
+        double *getV() const;
 
-            ~Matrix();
+        std::string elementToStr(int i) const;
+    };
 
-            double **getM() const;
+    std::ostream &operator<<(std::ostream &os, const LinearOps::Vector &vector);
 
-            int getRows() const;
+    class Matrix {
+    private:
+        double **m;
+        const u_int elSize = 5;
+    public:
+        const size_t rows, cols;
 
-            int getCols() const;
+        Matrix(size_t rows, size_t cols);
 
-            void print();
+        Matrix(size_t n);
 
-            Matrix operator+(const Matrix &matrix);
+        Matrix(const Matrix &matrix);
 
-            Matrix operator-(const Matrix &matrix);
+        ~Matrix();
 
-            Matrix operator*(const Matrix &matrix);
+        Matrix operator+(const Matrix &matrix);
 
-            Matrix operator*(const double &scalar);
-        };
-    }
+        Matrix operator-(const Matrix &matrix);
 
+        Matrix operator*(const Matrix &matrix);
 
+        Matrix operator*(const double &scalar);
 
+        Vector operator()(const Vector &vector);
+
+        double *operator[](size_t i);
+
+        Matrix operator!();
+
+        static Matrix unit(size_t n);
+
+        void print();
+
+        std::string elementToStr(int i, int j);
+    };
 }
 
 #endif //METODOS_NUMERICOS_LINEAR_OPS_H
