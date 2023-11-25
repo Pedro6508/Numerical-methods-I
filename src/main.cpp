@@ -1,7 +1,7 @@
 #include <iostream>
 #include "sonic_airplane.h"
 #include "output.h"
-#include "algebra/linear_ops.h"
+#include "utils/linear_ops.h"
 #include <cmath>
 using namespace std;
 
