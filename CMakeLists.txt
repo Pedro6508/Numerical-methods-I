@@ -11,6 +11,9 @@ set(SOURCE_FILES
         src/main.cpp
         src/sonic_airplane.cpp
         src/output.cpp
+        src/utils/linear_ops.cpp
+        src/utils/linear_ops.h
+        src/utils/vector.cpp
 )
 
 # Include fmt directory
