@@ -11,10 +11,17 @@ set(SOURCE_FILES
         src/main.cpp
         src/sonic_airplane.cpp
         src/output.cpp
-        src/utils/matrix.cpp
+)
+
+# Linear Algebra Implementation
+set(ALGEBRA_FILES
         src/utils/linear_ops.h
+        src/utils/matrix.cpp
         src/utils/vector.cpp
 )
+
+# Add linear algebra files
+list(APPEND SOURCE_FILES ${ALGEBRA_FILES})
 
 # Include fmt directory
 add_subdirectory(fmt)

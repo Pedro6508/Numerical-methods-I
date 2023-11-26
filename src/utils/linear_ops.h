@@ -2,7 +2,7 @@
 #define METODOS_NUMERICOS_LINEAR_OPS_H
 #include "iostream"
 
-namespace LinearOps {
+namespace Linear {
     class Vector {
     private:
         double *v;
@@ -30,14 +30,16 @@ namespace LinearOps {
 
         Vector operator!();
 
-        double &operator[](size_t i);
+        double &operator[](size_t i) const;
 
-        double *getV() const;
+        double *operator~() const;
+
+        Vector &operator=(const Vector &vector);
+
+        Vector &operator+=(const Vector &vector);
 
         std::string elementToStr(int i) const;
     };
-
-    std::ostream &operator<<(std::ostream &os, const LinearOps::Vector &vector);
 
     class Matrix {
     private:
@@ -64,7 +66,7 @@ namespace LinearOps {
 
         Vector operator()(const Vector &vector);
 
-        double *operator[](size_t i);
+        double **operator[](size_t i);
 
         Matrix operator!();
 
@@ -74,6 +76,10 @@ namespace LinearOps {
 
         std::string elementToStr(int i, int j);
     };
+
+    Matrix swap(size_t i, size_t j, size_t n);
+
+    std::ostream &operator<<(std::ostream &os, const Linear::Vector &vector);
 }
 
 #endif //METODOS_NUMERICOS_LINEAR_OPS_H

@@ -1,7 +1,7 @@
 #include "linear_ops.h"
 #import <iostream>
 
-using LinearOps::Vector;
+using Linear::Vector;
 
 Vector::Vector(size_t size) : size(size) {
     v = new double[size];
@@ -36,10 +36,6 @@ Vector::~Vector() {
     delete[] v;
 }
 
-double *Vector::getV() const {
-    return v;
-}
-
 std::string Vector::elementToStr(int i) const {
     auto el = v[i];
     auto sign = el != 0 ? (el > 0 ? "+" : "-") : " ";
@@ -48,7 +44,7 @@ std::string Vector::elementToStr(int i) const {
     return s;
 }
 
-double Vector::operator*(const LinearOps::Vector &vector) {
+double Vector::operator*(const Linear::Vector &vector) {
     double result = 0;
     if (size != vector.size) {
         std::cerr << "Vectors must be of the same size" << std::endl;
@@ -60,15 +56,6 @@ double Vector::operator*(const LinearOps::Vector &vector) {
     }
 
     return result;
-}
-
-std::ostream &LinearOps::operator<<(std::ostream &os, const LinearOps::Vector &vector) {
-    os << "[ ";
-    for (int i = 0; i < vector.size; i++) {
-        os << vector.elementToStr(i) << " ";
-    }
-    os << "]";
-    return os;
 }
 
 Vector Vector::operator*(const double &scalar) {
@@ -115,6 +102,47 @@ Vector Vector::operator!() {
     return result;
 }
 
-double &Vector::operator[](size_t i) {
+double &Vector::operator[](size_t i) const {
     return v[i];
+}
+
+double *Vector::operator~() const {
+    auto u = new double [size];
+    for (int i = 0; i < size; i++) {
+        u[i] = v[i];
+    }
+    return u;
+}
+
+std::ostream &Linear::operator<<(std::ostream &os, const Vector &vector) {
+    os << "[ ";
+    for (int i = 0; i < vector.size; i++) {
+        os << vector.elementToStr(i) << " ";
+    }
+    os << "]";
+    return os;
+}
+
+Vector &Vector::operator=(const Vector &vector) {
+    if (this == &vector) {
+        return *this;
+    }
+
+    Vector u(vector);
+    return u;
+}
+
+Vector &Vector::operator+=(const Vector &vector) {
+    if (size != vector.size) {
+        std::cerr << "Vectors must be of the same size" << std::endl;
+        return *this;
+    }
+
+    for (int i = 0; i < size; i++) {
+        v[i] += vector.v[i];
+    }
+
+    std::cout << *this << std::endl;
+
+    return *this;
 }
