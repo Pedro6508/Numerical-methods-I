@@ -19,21 +19,18 @@ struct Operation {
 
 class Algorithm {
 private:
-    Matrix *A;
-    Vector *b;
-    Vector *x;
+    Matrix &A;
+    Vector &b;
+    Vector &x;
     size_t n;
-
 public:
-    Algorithm(Matrix *A, Vector *b, Vector *x, size_t n);
+    Algorithm(Matrix &A, Vector &x, Vector &b, size_t n);
 
     void swapRows(size_t i, size_t j);
 
     void swapCols(size_t i, size_t j);
 
     void addRow(size_t i, size_t j, double scalar);
-
-    void addCol(size_t i, size_t j, double scalar);
 
     Algorithm operator<<(const Operation &op);
 };
