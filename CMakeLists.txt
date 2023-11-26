@@ -11,6 +11,8 @@ set(SOURCE_FILES
         src/main.cpp
         src/sonic_airplane.cpp
         src/output.cpp
+        src/utils/vector.h
+        src/utils/matrix.h
 )
 
 # Linear Algebra Implementation

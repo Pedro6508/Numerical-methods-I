@@ -27,7 +27,7 @@ Matrix Matrix::unit(size_t n) {
     return I;
 }
 
-Matrix Linear::swap(size_t i, size_t j, size_t n) {
+Matrix Matrix::swap(size_t i, size_t j, size_t n) {
     Matrix S = Matrix::unit(n);
     auto aux = new double[n];
     for (int k = 0; k < n; k++) {
