@@ -13,6 +13,8 @@ set(SOURCE_FILES
         src/output.cpp
         src/utils/vector.h
         src/utils/matrix.h
+        src/utils/gauss.h
+        src/utils/gauss.cpp
 )
 
 # Linear Algebra Implementation

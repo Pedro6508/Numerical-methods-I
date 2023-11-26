@@ -6,6 +6,9 @@ namespace Linear {
     #include "vector.h"
     #include "matrix.h"
 
+    namespace Gauss {
+        #include "gauss.h"
+    }
 }
 
 #endif //METODOS_NUMERICOS_LINEAR_OPS_H
