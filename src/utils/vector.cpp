@@ -124,12 +124,18 @@ std::ostream &Linear::operator<<(std::ostream &os, const Vector &vector) {
 }
 
 Vector &Vector::operator=(const Vector &vector) {
+    if (size != vector.size) {
+        std::cerr << "Vectors must be of the same size" << std::endl;
+        return *this;
+    }
+
     if (this == &vector) {
         return *this;
     }
 
-    Vector u(vector);
-    return u;
+    v = ~vector;
+
+    return *this;
 }
 
 Vector &Vector::operator+=(const Vector &vector) {
@@ -141,8 +147,6 @@ Vector &Vector::operator+=(const Vector &vector) {
     for (int i = 0; i < size; i++) {
         v[i] += vector.v[i];
     }
-
-    std::cout << *this << std::endl;
 
     return *this;
 }
