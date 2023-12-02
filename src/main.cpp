@@ -13,9 +13,9 @@ int main() {
     A[1] = new double[]{10,11,12};
     A[2] = new double[]{13,14,15};
     Algorithm Alg(A, x, b, 3);
-    A.print();
-    Alg.swapRows(0, 1);
-    A.print();
-    Alg.swapCols(0, 1);
-    A.print();
+    Alg.print();
+
+    Alg << Operation{ADD_ROW, 1, 0, -A[1][0]/A[0][0]}
+        << Operation{ADD_ROW, 2, 0, -A[2][0]/A[0][0]}
+        << Operation{ADD_ROW, 2, 1, -A[2][1]/A[1][1]};
 }

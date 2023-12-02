@@ -28,8 +28,6 @@ public:
 
     Vector operator()(const Vector &vector) const;
 
-    Vector &operator()(const size_t &i) const;
-
     double*& operator[](const size_t i) const;
 
     Matrix operator!() const;

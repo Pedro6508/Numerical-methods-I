@@ -121,10 +121,6 @@ double*& Matrix::operator[](const size_t i) const {
     return m[i];
 }
 
-Linear::Vector& Matrix::operator()(const size_t& i) const {
-    return *new Vector(m[i], cols);
-}
-
 Matrix Matrix::operator!() const {
 #pragma clang diagnostic push
 #pragma ide diagnostic ignored "ArgumentSelectionDefects"

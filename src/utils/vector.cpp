@@ -115,10 +115,8 @@ std::ostream &Linear::operator<<(std::ostream &os, const Vector &vector) {
     return os;
 }
 
-Vector &Vector::operator=(const double *rsh) {
-    for (int i = 0; i < size; i++) {
-        v[i] = rsh[i];
-    }
+Vector &Vector::operator=(double*& rsh) {
+    this->v = rsh;
     return *this;
 }
 

@@ -29,7 +29,7 @@ public:
 
     double& operator[](const size_t i) const;
 
-    Vector &operator=(const double *rsh);
+    Vector &operator=(double *&rsh);
 
     Vector &operator=(const Vector &rsh);
 

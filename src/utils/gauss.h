@@ -13,7 +13,7 @@ enum Type {
 
 struct Operation {
     Type type;
-    size_t pivot, j;
+    size_t i, j;
     double scalar;
 };
 
@@ -31,6 +31,8 @@ public:
     void swapCols(size_t i, size_t j);
 
     void addRow(size_t i, size_t j, double scalar);
+
+    void print();
 
     Algorithm operator<<(const Operation &op);
 };
