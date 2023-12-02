@@ -3,21 +3,21 @@
 
 using Linear::Matrix;
 
-Matrix::Matrix(size_t rows, size_t cols) : rows(rows), cols(cols) {
+Matrix::Matrix(const size_t rows, const size_t cols) : rows(rows), cols(cols) {
     m = new double *[rows];
     for (int i = 0; i < rows; i++) {
         m[i] = new double[cols];
     }
 }
 
-Matrix::Matrix(size_t n): rows(n), cols(n) {
+Matrix::Matrix(const size_t n): rows(n), cols(n) {
     m = new double *[n];
     for (int i = 0; i < n; i++) {
         m[i] = new double[n];
     }
 }
 
-Matrix Matrix::unit(size_t n) {
+Matrix Matrix::unit(const size_t n) {
     Matrix I(n);
 
     for (int i = 0; i < n; i++) {
@@ -27,19 +27,15 @@ Matrix Matrix::unit(size_t n) {
     return I;
 }
 
-Matrix Matrix::swap(size_t i, size_t j, size_t n) {
-    Matrix S = Matrix::unit(n);
-    auto aux = new double[n];
-    for (int k = 0; k < n; k++) {
-        aux[k] = (*S[i])[k];
-    }
-
+Matrix Matrix::swap(const size_t i, const size_t j, const size_t n) {
+    Matrix S = unit(n);
+    const auto aux = S[i];
     *S[i] = *S[j];
-    *S[j] = aux;
+    *S[j] = *aux;
     return S;
 }
 
-void Matrix::print() {
+void Matrix::print() const {
     using namespace std;
     cout << endl;
     for (int i = 0; i < rows; i++) {
@@ -54,7 +50,7 @@ void Matrix::print() {
     cout << endl;
 }
 
-Matrix Matrix::operator*(const double &scalar) {
+Matrix Matrix::operator*(const double &scalar) const {
     Matrix result(rows, cols);
     for (int i = 0; i < rows; i++) {
         for (int j = 0; j < cols; j++)
@@ -63,7 +59,7 @@ Matrix Matrix::operator*(const double &scalar) {
     return result;
 }
 
-Matrix Matrix::operator*(const Matrix &matrix) {
+Matrix Matrix::operator*(const Matrix &matrix) const {
     Matrix result(rows, matrix.cols);
     for (int i = 0; i < rows; i++) {
         for (int j = 0; j < matrix.cols; j++) {
@@ -76,7 +72,7 @@ Matrix Matrix::operator*(const Matrix &matrix) {
     return result;
 }
 
-Matrix Matrix::operator+(const Matrix &matrix) {
+Matrix Matrix::operator+(const Matrix &matrix) const {
     Matrix result(rows, cols);
     for (int i = 0; i < rows; i++) {
         for (int j = 0; j < cols; j++) {
@@ -86,7 +82,7 @@ Matrix Matrix::operator+(const Matrix &matrix) {
     return result;
 }
 
-Matrix Matrix::operator-(const Matrix &matrix) {
+Matrix Matrix::operator-(const Matrix &matrix) const {
     Matrix result(rows, cols);
     for (int i = 0; i < rows; i++) {
         for (int j = 0; j < matrix.cols; j++) {
@@ -103,13 +99,13 @@ Matrix::~Matrix() {
     delete[] m;
 }
 
-Linear::Vector Matrix::operator()(const Linear::Vector &vector) {
+Linear::Vector Matrix::operator()(const Vector &vector) const {
     if (cols != vector.size) {
         std::cerr << "Matrix and vector must be of the same size" << std::endl;
         return {{}, 0};
     }
 
-    Linear::Vector result(vector.size);
+    Vector result(vector.size);
     auto u = new double [vector.size];
     for (int i = 0; i < rows; i++) {
         u[i] = 0;
@@ -121,11 +117,15 @@ Linear::Vector Matrix::operator()(const Linear::Vector &vector) {
     return result;
 }
 
-double **Matrix::operator[](const size_t i) {
-    return &m[i];
+double*& Matrix::operator[](const size_t i) const {
+    return m[i];
 }
 
-Matrix Matrix::operator!() {
+Linear::Vector& Matrix::operator()(const size_t& i) const {
+    return *new Vector(m[i], cols);
+}
+
+Matrix Matrix::operator!() const {
 #pragma clang diagnostic push
 #pragma ide diagnostic ignored "ArgumentSelectionDefects"
     Matrix result(cols, rows);
@@ -139,7 +139,7 @@ Matrix Matrix::operator!() {
     return result;
 }
 
-std::string Matrix::elementToStr(int i, int j) {
+std::string Matrix::elementToStr(int i, int j) const {
     auto el = m[i][j];
     auto sign = el != 0 ? (el > 0 ? "+" : "-") : " ";
     std::string s = sign + std::to_string(abs(el));

@@ -1,9 +1,7 @@
 #ifndef METODOS_NUMERICOS_VECTOR_H
 #define METODOS_NUMERICOS_VECTOR_H
-#include <iostream>
 
 class Vector {
-private:
     double *v;
 public:
     const size_t size;
@@ -19,23 +17,25 @@ public:
 
     ~Vector();
 
-    Vector operator*(const double &scalar);
+    Vector operator*(const double &scalar) const;
 
-    Vector operator+(const Vector &vector);
+    Vector operator+(const Vector &vector) const;
 
-    Vector operator-(const Vector &vector);
+    Vector operator-(const Vector &rsh) const;
 
-    double operator*(const Vector &vector);
+    double operator*(const Vector &rsh) const;
 
-    Vector operator!();
+    Vector operator!() const;
 
-    double &operator[](size_t i) const;
+    double& operator[](const size_t i) const;
 
-    double *operator~() const;
+    Vector &operator=(const double *rsh);
 
-    Vector &operator=(const Vector &vector);
+    Vector &operator=(const Vector &rsh);
 
-    Vector &operator+=(const Vector &vector);
+    Vector &operator=(const Vector &&rsh);
+
+    Vector &operator+=(const Vector &rsh);
 
     std::string elementToStr(int i) const;
 };

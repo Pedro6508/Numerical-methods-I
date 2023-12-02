@@ -18,27 +18,29 @@ public:
 
     ~Matrix();
 
-    Matrix operator+(const Matrix &matrix);
+    Matrix operator+(const Matrix &matrix) const;
 
-    Matrix operator-(const Matrix &matrix);
+    Matrix operator-(const Matrix &matrix) const;
 
-    Matrix operator*(const Matrix &matrix);
+    Matrix operator*(const Matrix &matrix) const;
 
-    Matrix operator*(const double &scalar);
+    Matrix operator*(const double &scalar) const;
 
-    Vector operator()(const Vector &vector);
+    Vector operator()(const Vector &vector) const;
 
-    double **operator[](size_t i);
+    Vector &operator()(const size_t &i) const;
 
-    Matrix operator!();
+    double*& operator[](const size_t i) const;
+
+    Matrix operator!() const;
 
     static Matrix unit(size_t n);
 
     static Matrix swap(size_t i, size_t j, size_t n);
 
-    void print();
+    void print() const;
 
-    std::string elementToStr(int i, int j);
+    std::string elementToStr(int i, int j) const;
 };
 
 #endif //METODOS_NUMERICOS_MATRIX_H
